@@ -2,9 +2,16 @@ import sys
 import subprocess
 from pathlib import Path
 import pandas as pd
+import argparse
 import datetime # <--- REQUIRED: Import this so eval() understands the time objects
 
-k = 2
+parser = argparse.ArgumentParser(description="To run mm accross various orders")
+parser.add_argument("--order", default=1, type=int, help = "order of mm")
+parser.add_argument("--k", default=3, type = int, help = "no of folds")
+args = parser.parse_args()
+
+k = args.k
+order = args.order
 input_file_path = Path("projectData/chr4_200bp_bins.tsv")
 tf_name = 'CTCF'
 
