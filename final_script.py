@@ -166,7 +166,7 @@ def the_ultimate_function(tsv_path, tf_name, m = 1, k = 3):
         log_dict['chrm'].append(tsv_file.stem[:4])
         log_dict['order'].append(m)
         log_dict['TF'].append(tf_name)
-        log_dict['fold_idx'].append(f"{i}/{k}")
+        log_dict['fold_idx'].append(f"{i}/{k-1}")
         log_dict['start_time'].append(start_time.time())
         log_dict['stop_time'].append(end_time.time())
         log_dict['time_elapsed'].append(round(t, 3))
