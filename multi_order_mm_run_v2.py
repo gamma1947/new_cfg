@@ -7,7 +7,7 @@ import datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--order", default=10, type=int)
-parser.add_argument("--k", default=3, type=int)
+parser.add_argument("--k", default=5, type=int)
 args = parser.parse_args()
 
 k = args.k
