@@ -10,11 +10,11 @@ tf_name = 'CTCF'
 
 df_global = pd.DataFrame()
 
-for m in range(1):
+for m in range(2):
     print(f"\n--- Starting subprocess for m={m} ---")
     
     command = [
-        sys.executable, '-u', 'final_2.py', 
+        sys.executable, '-u', 'final_script.py', 
         '--order', str(m), 
         '--k', str(k), 
         '--input', str(input_file_path), 
@@ -45,6 +45,10 @@ for m in range(1):
             
             df_m = pd.DataFrame(data_dict)
             df_global = pd.concat([df_global, df_m], ignore_index=True)
+            if not df_global.empty:
+                output_filename = f"ultimate_log_k_{k}_{input_file_path.stem}_{tf_name}.txt"
+                df_global.to_csv(output_filename, sep='\t', index=False)
+                print(f"Saved to {output_filename}")
             print(f"\n[Success] DataFrame appended for m={m}")
         else:
             print(f"\n[Error] No dictionary structure found in output for m={m}")
@@ -55,7 +59,4 @@ for m in range(1):
 print("\nFinal Global DataFrame:")
 print(df_global)
 
-if not df_global.empty:
-    output_filename = f"ultimate_log_k_{k}_{input_file_path.stem}_{tf_name}.txt"
-    df_global.to_csv(output_filename, sep='\t', index=False)
-    print(f"Saved to {output_filename}")
+

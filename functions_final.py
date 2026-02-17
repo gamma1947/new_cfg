@@ -56,8 +56,7 @@ def log_likelihood_numpy(log_tm, seq, m, mapping):
         windows_hist = np.lib.stride_tricks.sliding_window_view(seq_arr[:-1], window_shape=m)
         row_indices = np.dot(windows_hist, powers_history)
     else:
-        
-        row_indices = np.zeros(len(seq)-1, dtype=int)
+        row_indices = np.zeros(len(seq), dtype=int)
 
     col_indices = seq_arr[m:]
 

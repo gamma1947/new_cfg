@@ -176,7 +176,7 @@ def the_ultimate_function(tsv_path, tf_name, m = 1, k = 3):
         _,peak = tracemalloc.get_traced_memory()
         tracemalloc.stop()
         module_memory = tracemalloc.get_tracemalloc_memory()
-        log_dict['memory_used (MB)'].append((peak-module_memory)/(1024**2))
+        log_dict['memory_used (MB)'].append(round((peak-module_memory)/(1024**2),3))
         
     return log_dict
 
