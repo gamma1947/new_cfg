@@ -79,7 +79,7 @@ def the_ultimate_function(tsv_path, tf_name, m = 1, k = 3):
                 'AOC-ROC':[], 'AOC-PR':[], 'memory_used (MB)':[]
                 }
     
-    for i in tqdm.tqdm(range(k)):
+    for i in tqdm(range(k)):
         tracemalloc.start()
         tic = time.perf_counter()
         start_time = datetime.now()
@@ -95,7 +95,7 @@ def the_ultimate_function(tsv_path, tf_name, m = 1, k = 3):
         test_block_pos = set(B_split[i])
         test_block_neg = set(U_split[i])
 
-        tqdm.tqdm.write(f"training started for fold-{i}")
+        tqdm.write(f"training started for fold-{i}")
 
         # 1. Count (m+1)-mers
         counts_pos = get_kmer_counts_vectorized(train_seqs_pos, m, base_map)
@@ -106,7 +106,7 @@ def the_ultimate_function(tsv_path, tf_name, m = 1, k = 3):
         tm_pos_log = markov_model_numpy(counts_pos, m, pseudocount)
         tm_neg_log = markov_model_numpy(counts_neg, m, pseudocount)
 
-        tqdm.tqdm.write(f"training completed for fold-{i}...starting test")
+        tqdm.write(f"training completed for fold-{i}...starting test")
         
         log_likelihood_scores = []
         y_true = []
@@ -114,7 +114,7 @@ def the_ultimate_function(tsv_path, tf_name, m = 1, k = 3):
 
         test_indices = list(test_block_pos | test_block_neg)
         
-        for idx in tqdm.tqdm(test_indices):
+        for idx in tqdm(test_indices):
             seq = seq_dict[idx]
             
             # Calculate score using the log-matrices
@@ -135,8 +135,8 @@ def the_ultimate_function(tsv_path, tf_name, m = 1, k = 3):
         precision, recall, thresholds = met.precision_recall_curve(y_true, log_likelihood_scores)
         pr_auc = met.average_precision_score(y_true, log_likelihood_scores)
         
-        tqdm.tqdm.write(f"Area Under Curve (AUC): {roc_auc:.4f}")
-        tqdm.tqdm.write(f"AUC-PR (Average Precision): {pr_auc:.4f}")
+        tqdm.write(f"Area Under Curve (AUC): {roc_auc:.4f}")
+        tqdm.write(f"AUC-PR (Average Precision): {pr_auc:.4f}")
         
         toc = time.perf_counter()
         end_time = datetime.now()
