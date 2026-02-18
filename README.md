@@ -1,5 +1,11 @@
 # BI3464_CFG-Project (Hitesh C K, Sindhuja T)
-January 2026 Semester. Course: BI3464 (CFG). Hitesh & Sindhuja.
+January 2026 Semester. Course: BI3464 (CFG).
+
+# Building Markov Model-Based Classifier
+
+This project builds an m-th order Markov model classifier to predict transcription factor (TF) binding using DNA sequence data. Here, the classifier is evaluated using k-fold cross validation, and is checked using:
+- Receiver Operating Characteristic (ROC) curves, and area under them (AUC-ROC)
+- Precision-Recall (PR) curves, and area under them (AUC-PR)
 
 # Requirements
 
@@ -21,7 +27,30 @@ Installation by pip intall numpy matplotlib tqdm scikit-learn pandas
 - 'log' - contains information about time taken and memory used while running file
 - 'plots' - contains plots for each fold for k=5, m in the range(0,11) (1 to 10)
 
-# Running simplerVersion.py
+# Running 'final_script.py'
+
+The file takes the following inputs:
+- Order m of Markov model
+- Number of k-folds in cross validation
+- Input TSV file corresponding to required chromosome
+- Name of TF
+
+## Running code
+
+Run from the terminal as:
+
+python final_script.py <m> <k> <.tsv> <TF>
+
+## Output
+
+For each fold:
+- ROC curve (saved in 'plots')
+- PR curve (saved in 'plots')
+- AUC-ROC & AUC-PR
+- Runtime & Memory usage
+- Log file containing all results
+
+# Running 'simplerVersion.py'
 
 This script implements an m-th order Markov model for DNA sequences.
 
